@@ -1,10 +1,12 @@
 # PG Smart Home
 
-PG Smart Home documents Alexa Voice Control integration in an existing Smart Home where:
-- a Loxone-Mini-Server 
+PG Smart Home documents Alexa voice control integration in an existing smart home.
+
+Prerequisites are
+- a Loxone-server,
 - a Raspberry-Pi and
 - at least one Alexa
-is in place for automation.
+is in place for automation and is inside the same IP-subnet.
 
 ## Steps
 
@@ -17,10 +19,12 @@ is in place for automation.
 
 2. Get and start HA-Bridge
 
-  ```
-  // Get image and start container
-  docker run --name bridge -d --net=host -v /bridge/data/:/bridge/data -e PORT="-Dserver.port=8080" -e KEY="-Dsecurity.key=Xfawer3rspertSdf321234asd" michaelmiklis/rpi-habridge --restart always
-  ```
+   ```
+   // Get image and start container
+   docker run --name bridge -d --net=host -v /bridge/data/:/bridge/data -e PORT="-Dserver.port=8080" -e KEY="-Dsecurity.key=Xfawer3rspertSdf321234asd" michaelmiklis/rpi-habridge --restart always
+   ```
+
+   Set the UPNP-IP-address in the HA-bridge interface to the IP-address of the raspberry inside the subnet.
 
 3. Import Loxone Settings
    
@@ -34,5 +38,4 @@ is in place for automation.
 
    // Make manualy adjustments in home-bridge
    http://<user-loxone>:<pwd-loxone>@<loxone-ip>:<loxone-port>/data/LoxAPP3.json returns you the configuration.
-
    ```
